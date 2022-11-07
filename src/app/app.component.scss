@@ -1,0 +1,18 @@
+#top-bar {
+    display: flex;
+    align-items: center;
+    gap: 150px;
+}
+
+#upload-container {
+    //margin-right: 40vw;
+}
+
+button {
+    width: 290px;
+    height: 76px;
+    border-radius: 55px;
+    background-color: rgb(217, 217, 217);
+    font-family: 'Georama-Regular';
+    font-size: 50px;
+}

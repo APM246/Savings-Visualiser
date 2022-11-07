@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "Georama-Light";
+    src: url(./assets/fonts/Georama-Light.ttf);
+}
+
+@font-face {
+    font-family: "Georama-Regular";
+    src: url(./assets/fonts/Georama-Regular.ttf);
+}
+
+body {
+    background-image: url(./assets/gradient.png);
+}
