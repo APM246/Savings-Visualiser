@@ -1,4 +1,7 @@
 <div>
     <p> {{ text }} </p>
-    <img src="../../assets/upload.png"> 
+    <label for="file-input">
+        <img src="../../assets/upload.png"> 
+    </label>
+    <input id="file-input" type="file" accept=".csv" (change)="handleFileInput($event)">
 </div>

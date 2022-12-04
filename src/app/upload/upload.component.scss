@@ -3,7 +3,7 @@ div {
     flex-direction: row;
     align-items: center;
     justify-content: flex-end;
-    gap: 71px; 
+    gap: 51px; 
 }
 
 p {
@@ -14,4 +14,12 @@ p {
 img {
     width: 57.44px;
     height: 57.44px;
+}
+
+input {
+    display: none;
+}
+
+label:hover {
+    cursor: pointer;
 }

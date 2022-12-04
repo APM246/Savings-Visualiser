@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FileUploadService } from '../file-upload.service';
 
 @Component({
   selector: 'app-upload',
@@ -8,9 +9,14 @@ import { Component, OnInit, Input } from '@angular/core';
 export class UploadComponent implements OnInit {
   @Input() text!: string;
 
-  constructor() { }
+  constructor(public fileUploadService: FileUploadService) { }
 
   ngOnInit(): void {
+  }
+
+  handleFileInput(event: Event) {
+    const file: File | null = (event.target as HTMLInputElement).files!.item(0);
+    this.fileUploadService.postFile(file).subscribe()
   }
 
 }
