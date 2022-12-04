@@ -1,14 +1,13 @@
 <div id="top-bar">
     <div id="upload-container">
-        <app-upload [text]="'Upload Bankwest transactions'"></app-upload>
-        <app-upload [text]="'Upload Commbank transactions (optional)'"></app-upload>
+        <app-upload [number] = "'1'" [text]="'Upload Bankwest transactions'"></app-upload>
+        <app-upload [number] = "'2'" [text]="'Upload Commbank transactions (optional)'"></app-upload>
     </div>
     <div id="button-container">
         <button type="button"> 
             Visualise
         </button>
     </div>
-    <p> hello </p>
 </div>
 
 <router-outlet></router-outlet>

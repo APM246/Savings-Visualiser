@@ -1,7 +1,12 @@
-<div>
-    <p> {{ text }} </p>
-    <label for="file-input">
-        <img src="../../assets/upload.png"> 
-    </label>
-    <input id="file-input" type="file" accept=".csv" (change)="handleFileInput($event)">
+<div class="row-container">
+    <div class="main-text-container">
+        <p class="main-text"> {{ text }} </p>
+        <label for="file-input-{{number}}">
+            <img src="../../assets/upload.png"> 
+        </label>
+        <input id="file-input-{{number}}" type="file" accept=".csv" (change)="handleFileInput($event)">
+    </div>
+    <div class="filename-text"> 
+        <p> {{ fileName }} </p>
+    </div>
 </div>
