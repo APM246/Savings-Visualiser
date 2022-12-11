@@ -2,11 +2,14 @@
     <div class="main-text-container">
         <p class="main-text"> {{ text }} </p>
         <label for="file-input-{{number}}">
-            <img src="../../assets/upload.png"> 
+            <img src="../../assets/upload.png" class="icons"> 
         </label>
         <input id="file-input-{{number}}" type="file" accept=".csv" (change)="handleFileInput($event)">
     </div>
     <div class="filename-text"> 
         <p> {{ fileName }} </p>
     </div>
+</div>
+<div>
+    <img [src]="srcImage" class="graph">
 </div>

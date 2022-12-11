@@ -10,6 +10,7 @@ export class UploadComponent implements OnInit {
   @Input() text!: string;
   @Input() number!: string;
   fileName!: string;
+  srcImage!: string | ArrayBuffer | null;
 
   constructor(public fileUploadService: FileUploadService) { }
 
@@ -18,9 +19,22 @@ export class UploadComponent implements OnInit {
 
   handleFileInput(event: Event) {
     const file: File | null = (event.target as HTMLInputElement).files!.item(0);
-    this.fileName = file?.name || "";
-    console.log(this.text);
-    this.fileUploadService.postFile(file).subscribe()
+    if (file != null) {
+      this.fileName = file.name;
+      this.fileUploadService.postFile(file).subscribe(
+        (data: Blob) => {
+          this.extractImage(data);
+        }
+      )
+    }
+  }
+
+  private extractImage(data: Blob) {
+    let reader = new FileReader();
+    reader.readAsDataURL(data);
+    reader.onloadend = () => { 
+      this.srcImage = reader.result
+    }
   }
 
 }
