@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FileUploadService } from '../file-upload.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-upload',
@@ -10,31 +9,18 @@ export class UploadComponent implements OnInit {
   @Input() text!: string;
   @Input() number!: string;
   fileName!: string;
-  srcImage!: string | ArrayBuffer | null;
+  @Output() fileChanged: EventEmitter<File> = new EventEmitter();
 
-  constructor(public fileUploadService: FileUploadService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   handleFileInput(event: Event) {
-    const file: File | null = (event.target as HTMLInputElement).files!.item(0);
-    if (file != null) {
-      this.fileName = file.name;
-      this.fileUploadService.postFile(file).subscribe(
-        (data: Blob) => {
-          this.extractImage(data);
-        }
-      )
+    const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
+    if (uploadedFile != null) {
+      this.fileName = uploadedFile.name;
+      this.fileChanged.emit(uploadedFile);
     }
   }
-
-  private extractImage(data: Blob) {
-    let reader = new FileReader();
-    reader.readAsDataURL(data);
-    reader.onloadend = () => { 
-      this.srcImage = reader.result
-    }
-  }
-
 }

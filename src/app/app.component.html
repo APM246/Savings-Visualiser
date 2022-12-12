@@ -1,13 +1,16 @@
 <div id="top-bar">
     <div id="upload-container">
-        <app-upload [number] = "'1'" [text]="'Upload Bankwest transactions'"></app-upload>
+        <app-upload [number] = "'1'" [text]="'Upload Bankwest transactions'" (fileChanged)="fileChange($event)"></app-upload>
         <app-upload [number] = "'2'" [text]="'Upload Commbank transactions (optional)'"></app-upload>
     </div>
     <div id="button-container">
-        <button type="button"> 
+        <button type="button" [disabled]="!buttonEnabled" (click)="getGraph()"> 
             Visualise
         </button>
     </div>
+</div>
+<div id="photo-container">
+    <img [src]="srcImage" class="graph">
 </div>
 
 <router-outlet></router-outlet>

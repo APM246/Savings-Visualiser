@@ -6,10 +6,6 @@
     margin-left: 50px;
 }
 
-#upload-container {
-    
-}
-
 button {
     width: 268px;
     height: 66px;
@@ -17,4 +13,19 @@ button {
     background-color: rgb(217, 217, 217);
     font-family: 'Georama-Regular';
     font-size: 35px;
+}
+
+button:enabled {
+    cursor: pointer;
+}
+
+#photo-container {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.graph {
+    width: 550px;
 }
