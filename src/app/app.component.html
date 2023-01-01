@@ -1,9 +1,5 @@
-<div id="top-bar">
-    <form>
-        <div id="upload-container">
-            <app-upload (graphImage)="setImage($event)"></app-upload>
-        </div>
-    </form>
+<div id="upload-container">
+    <app-upload (graphImage)="setImage($event)"></app-upload>
 </div>
 <div id="photo-container">
     <img [src]="srcImage" class="graph">

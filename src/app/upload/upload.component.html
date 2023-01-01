@@ -1,22 +1,31 @@
-<!-- <div class="row-container">
-    <div class="main-text-container">
-        <p class="main-text"> {{ text }} </p>
-        <label for="file-input-{{number}}">
-            <img src="../../assets/upload.png" class="icons"> 
-        </label>
-        <input id="file-input-{{number}}" type="file" accept=".csv" (change)="handleFileInput($event)">
-    </div>
-    <div class="filename-text"> 
-        <p> {{ fileName }} </p>
-    </div>
-</div> -->
-
 <form [formGroup]="form" (ngSubmit)="getGraph()">
-    <label for="bankwest"> Upload Bankwest transactions </label>
-    <input id="bankwest" type="file" formControlName="bankwestData" (change)="handleBankwestInput($event)">
+    <div> 
+        <div class="row-container">
+            <div class="main-text-container">
+                <p class="main-text"> Upload Bankwest transactions </p>
+                <label for="bankwest">
+                    <img src="../../assets/upload.png" class="icons"> 
+                </label>
+                <input id="bankwest" type="file" formControlName="bankwestData" accept=".csv" (change)="handleBankwestInput($event)">
+            </div>
+            <div class="filename-text"> 
+                <p> {{ bankwestFile?.name }} </p>
+            </div>
+        </div>
 
-    <label for="cba"> Upload Commbank transactions (optional) </label>
-    <input id="cba" type="file" formControlName="commbankData" (change)="handleCommbankInput($event)">
-    
+        <div class="row-container">
+            <div class="main-text-container">
+                <p class="main-text"> Upload Commbank transactions (optional) </p>
+                <label for="cba"> 
+                    <img src="../../assets/upload.png" class="icons">      
+                </label>
+                <input id="cba" type="file" formControlName="commbankData" accept=".csv" (change)="handleCommbankInput($event)">
+            </div>
+            <div class="filename-text"> 
+                <p> {{ commbankFile?.name }} </p>
+            </div>
+        </div>
+    </div>
+
     <button type="submit" [disabled]="!form.valid"> Visualise </button>
 </form>

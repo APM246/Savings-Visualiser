@@ -1,22 +1,6 @@
-#top-bar {
-    display: flex;
-    align-items: center;
-    gap: 350px;
+#upload-container {
     margin-top: 100px;
     margin-left: 50px;
-}
-
-button {
-    width: 268px;
-    height: 66px;
-    border-radius: 55px;
-    background-color: rgb(217, 217, 217);
-    font-family: 'Georama-Regular';
-    font-size: 35px;
-}
-
-button:enabled {
-    cursor: pointer;
 }
 
 #photo-container {

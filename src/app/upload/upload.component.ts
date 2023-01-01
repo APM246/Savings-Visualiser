@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FileUploadService } from '../file-upload.service';
 
 @Component({
@@ -8,13 +8,12 @@ import { FileUploadService } from '../file-upload.service';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-  fileName!: string;
   bankwestFile!: File | null;
   commbankFile!: File | null;
   @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
 
   form = new FormGroup({
-    bankwestData: new FormControl<File | null>(null),
+    bankwestData: new FormControl<File | null>(null, [Validators.required]),
     commbankData: new FormControl<File | null>(null)
   })
 
