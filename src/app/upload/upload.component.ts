@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { FileUploadService } from '../file-upload.service';
 
 @Component({
   selector: 'app-upload',
@@ -6,21 +8,50 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-  @Input() text!: string;
-  @Input() number!: string;
   fileName!: string;
-  @Output() fileChanged: EventEmitter<File> = new EventEmitter();
+  srcImage!: string | ArrayBuffer | null;
+  bankwestFile!: File | null;
+  commbankFile!: File | null;
 
-  constructor() { }
+  form = new FormGroup({
+    bankwestData: new FormControl<File | null>(null),
+    commbankData: new FormControl<File | null>(null)
+  })
+
+  constructor(public fileUploadService: FileUploadService) { }
 
   ngOnInit(): void {
   }
 
-  handleFileInput(event: Event) {
+  handleBankwestInput(event: Event) {
     const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
     if (uploadedFile != null) {
-      this.fileName = uploadedFile.name;
-      this.fileChanged.emit(uploadedFile);
+      this.bankwestFile = uploadedFile;
+    }
+  }
+
+  handleCommbankInput(event: Event) {
+    const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
+    if (uploadedFile != null) {
+      this.commbankFile = uploadedFile;
+    }
+  }
+
+  getGraph() {
+    if (this.bankwestFile != null) {
+      this.fileUploadService.post(this.bankwestFile, this.commbankFile).subscribe(
+        (data: Blob) => {
+          this.extractImage(data);
+        }
+      )
+    }
+  }
+
+  private extractImage(data: Blob) {
+    let reader = new FileReader();
+    reader.readAsDataURL(data);
+    reader.onloadend = () => { 
+      this.srcImage = reader.result
     }
   }
 }

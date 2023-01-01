@@ -1,4 +1,4 @@
-<div class="row-container">
+<!-- <div class="row-container">
     <div class="main-text-container">
         <p class="main-text"> {{ text }} </p>
         <label for="file-input-{{number}}">
@@ -9,4 +9,14 @@
     <div class="filename-text"> 
         <p> {{ fileName }} </p>
     </div>
-</div>
+</div> -->
+
+<form [formGroup]="form" (ngSubmit)="getGraph()">
+    <label for="bankwest"> Upload Bankwest transactions </label>
+    <input id="bankwest" type="file" formControlName="bankwestData" (change)="handleBankwestInput($event)">
+
+    <label for="cba"> Upload Commbank transactions (optional) </label>
+    <input id="cba" type="file" formControlName="commbankData" (change)="handleCommbankInput($event)">
+    
+    <button type="submit" [disabled]="!form.valid"> Visualise </button>
+</form>

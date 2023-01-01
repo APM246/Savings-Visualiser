@@ -10,10 +10,13 @@ export class FileUploadService {
 
   constructor(private http: HttpClient) { }
 
-  postFile(file: File): Observable<Blob> {
+  post(bankwestFile: File, commbankFile: File | null): Observable<Blob> {
     const endpoint = 'http://localhost:8000/api/graph';
     const formData: FormData = new FormData();
-    formData.append('file', file, file.name);
+    formData.append('bankwest', bankwestFile, bankwestFile.name);
+    if (commbankFile != null) {
+      formData.append('commbank', commbankFile, commbankFile.name);
+    }
     return this.http.post(endpoint, formData, {responseType: 'blob'})
   }
 }
