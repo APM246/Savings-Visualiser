@@ -1,14 +1,12 @@
 <div id="top-bar">
     <form>
         <div id="upload-container">
-            <app-upload></app-upload>
-        </div>
-        <div id="button-container">
+            <app-upload (graphImage)="setImage($event)"></app-upload>
         </div>
     </form>
 </div>
 <div id="photo-container">
-    <!-- <img [src]="srcImage" class="graph"> -->
+    <img [src]="srcImage" class="graph">
 </div>
 
 <router-outlet></router-outlet>

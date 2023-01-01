@@ -6,8 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'savings-visualiser';
-  file!: File;
+  srcImage!: string | ArrayBuffer | null;
 
   constructor() {}
+
+  setImage(image: string | ArrayBuffer | null) {
+    this.srcImage = image;
+  }
 }

@@ -9,9 +9,9 @@ import { FileUploadService } from '../file-upload.service';
 })
 export class UploadComponent implements OnInit {
   fileName!: string;
-  srcImage!: string | ArrayBuffer | null;
   bankwestFile!: File | null;
   commbankFile!: File | null;
+  @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
 
   form = new FormGroup({
     bankwestData: new FormControl<File | null>(null),
@@ -51,7 +51,7 @@ export class UploadComponent implements OnInit {
     let reader = new FileReader();
     reader.readAsDataURL(data);
     reader.onloadend = () => { 
-      this.srcImage = reader.result
+      this.graphImage.emit(reader.result);
     }
   }
 }
