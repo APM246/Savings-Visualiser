@@ -42,7 +42,8 @@ export class UploadComponent implements OnInit {
 
   form = new FormGroup({
     bankwestData: new FormControl<File | null>(null, [Validators.required]),
-    commbankData: new FormControl<File | null>(null)
+    commbankData: new FormControl<File | null>(null),
+    hideAxis: new FormControl<boolean>(false, {nonNullable: true})
   })
 
   constructor(public fileUploadService: FileUploadService) { }
@@ -52,8 +53,7 @@ export class UploadComponent implements OnInit {
 
   getGraph() {
     if (this.bankwestFile != null) {
-      console.log("not null")
-      this.fileUploadService.post(this.bankwestFile, this.commbankFile).subscribe(
+      this.fileUploadService.post(this.bankwestFile, this.commbankFile, this.form.value.hideAxis ?? false).subscribe(
         (data: Blob) => {
           this.extractImage(data);
         }

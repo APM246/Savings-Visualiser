@@ -13,7 +13,9 @@
                 <ng-template #cba> {{ commbankFile?.name }} </ng-template>
             </div>
         </div>
+        <label for="hideAxis" class="main-text"> Hide y-axis </label>
+        <input id="hideAxis" type="checkbox" formControlName="hideAxis">
     </div>
-
+    
     <button type="submit" [disabled]="!form.valid"> Visualise </button>
 </form>
