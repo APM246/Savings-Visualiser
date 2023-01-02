@@ -1,5 +1,5 @@
 <form [formGroup]="form" (ngSubmit)="getGraph()">
-    <div>
+    <div class="rows">
         <div class="row-container" *ngFor="let bank of banks">
             <div class="main-text-container">
                 <p class="main-text"> {{ bank.mainText }} </p>
@@ -13,8 +13,10 @@
                 <ng-template #cba> {{ commbankFile?.name }} </ng-template>
             </div>
         </div>
-        <label for="hideAxis" class="main-text"> Hide y-axis </label>
-        <input id="hideAxis" type="checkbox" formControlName="hideAxis">
+        <div>
+            <label for="hideAxis" class="main-text"> Hide y-axis </label>
+            <input id="hideAxis" type="checkbox" formControlName="hideAxis">
+        </div>
     </div>
     
     <button type="submit" [disabled]="!form.valid"> Visualise </button>

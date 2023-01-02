@@ -4,6 +4,12 @@ form {
     gap: 250px;
 }
 
+.rows {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
 .row-container {
     display: flex;
     flex-direction: row;
