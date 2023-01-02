@@ -9,7 +9,8 @@
                 <input [id]="bank.formControlName" type="file" [formControlName]="bank.formControlName" accept=".csv" (change)="bank.handleInput($event)">
             </div>
             <div class="filename-text"> 
-                <p> {{ bank.file?.name }} </p>
+                <p *ngIf="bank.formControlName == 'bankwestData'; else cba"> {{ bankwestFile?.name }} </p>
+                <ng-template #cba> {{ commbankFile?.name }} </ng-template>
             </div>
         </div>
     </div>

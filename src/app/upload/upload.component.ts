@@ -9,22 +9,34 @@ import { BankFormData } from '../../types/types';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-  bankwestFile!: File | null;
+  bankwestFile: File | null = null;
   commbankFile!: File | null;
   @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
+
+  handleBankwestInput = (event: Event) => {
+    const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
+    if (uploadedFile != null) {
+      this.bankwestFile = uploadedFile;
+    }
+  }
+
+  handleCommbankInput = (event: Event) => {
+    const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
+    if (uploadedFile != null) {
+      this.commbankFile = uploadedFile;
+    }
+  }
 
   readonly banks: BankFormData[] = [
     {
       mainText: "Upload Bankwest transactions",
       formControlName: "bankwestData",
       handleInput: this.handleBankwestInput,
-      file: this.bankwestFile
     },
     {
       mainText: "Upload Commbank transactions (optional)",
       formControlName: "commbankData",
       handleInput: this.handleCommbankInput,
-      file: this.commbankFile
     }
   ]
 
@@ -38,22 +50,9 @@ export class UploadComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleBankwestInput(event: Event) {
-    const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
-    if (uploadedFile != null) {
-      this.bankwestFile = uploadedFile;
-    }
-  }
-
-  handleCommbankInput(event: Event) {
-    const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
-    if (uploadedFile != null) {
-      this.commbankFile = uploadedFile;
-    }
-  }
-
   getGraph() {
     if (this.bankwestFile != null) {
+      console.log("not null")
       this.fileUploadService.post(this.bankwestFile, this.commbankFile).subscribe(
         (data: Blob) => {
           this.extractImage(data);
