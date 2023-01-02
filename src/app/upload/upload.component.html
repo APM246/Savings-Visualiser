@@ -1,28 +1,15 @@
 <form [formGroup]="form" (ngSubmit)="getGraph()">
-    <div> 
-        <div class="row-container">
+    <div>
+        <div class="row-container" *ngFor="let bank of banks">
             <div class="main-text-container">
-                <p class="main-text"> Upload Bankwest transactions </p>
-                <label for="bankwest">
+                <p class="main-text"> {{ bank.mainText }} </p>
+                <label [for]="bank.formControlName">
                     <img src="../../assets/upload.png" class="icons"> 
                 </label>
-                <input id="bankwest" type="file" formControlName="bankwestData" accept=".csv" (change)="handleBankwestInput($event)">
+                <input [id]="bank.formControlName" type="file" [formControlName]="bank.formControlName" accept=".csv" (change)="bank.handleInput($event)">
             </div>
             <div class="filename-text"> 
-                <p> {{ bankwestFile?.name }} </p>
-            </div>
-        </div>
-
-        <div class="row-container">
-            <div class="main-text-container">
-                <p class="main-text"> Upload Commbank transactions (optional) </p>
-                <label for="cba"> 
-                    <img src="../../assets/upload.png" class="icons">      
-                </label>
-                <input id="cba" type="file" formControlName="commbankData" accept=".csv" (change)="handleCommbankInput($event)">
-            </div>
-            <div class="filename-text"> 
-                <p> {{ commbankFile?.name }} </p>
+                <p> {{ bank.file?.name }} </p>
             </div>
         </div>
     </div>

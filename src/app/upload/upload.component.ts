@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FileUploadService } from '../file-upload.service';
+import { BankFormData } from '../../types/types';
 
 @Component({
   selector: 'app-upload',
@@ -11,6 +12,21 @@ export class UploadComponent implements OnInit {
   bankwestFile!: File | null;
   commbankFile!: File | null;
   @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
+
+  readonly banks: BankFormData[] = [
+    {
+      mainText: "Upload Bankwest transactions",
+      formControlName: "bankwestData",
+      handleInput: this.handleBankwestInput,
+      file: this.bankwestFile
+    },
+    {
+      mainText: "Upload Commbank transactions (optional)",
+      formControlName: "commbankData",
+      handleInput: this.handleCommbankInput,
+      file: this.commbankFile
+    }
+  ]
 
   form = new FormGroup({
     bankwestData: new FormControl<File | null>(null, [Validators.required]),
