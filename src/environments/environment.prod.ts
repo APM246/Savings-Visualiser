@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "http://localhost:8000/api/graph/v"
+  apiUrl: "savings-visualiser-env.eba-daupks2m.ap-southeast-2.elasticbeanstalk.com"
 };
