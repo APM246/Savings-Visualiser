@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https://savings-visualiser-api.com"
+  apiUrl: "https://api.arunmuthu.net/api/graph"
 };
