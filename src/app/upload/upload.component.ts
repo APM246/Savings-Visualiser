@@ -55,7 +55,17 @@ export class UploadComponent implements OnInit {
 
   getGraph() {
     if (this.bankwestFile != null) {
-      this.fileUploadService.post(this.bankwestFile, this.commbankFile, this.form.value.hideAxis ?? false).subscribe(
+        let files: File[];
+        let bankTypes: BankType[]
+        if (this.commbankFile != null) {
+            files = [this.bankwestFile, this.commbankFile]
+            bankTypes = [BankType.Bankwest, BankType.Commbank]
+        }
+        else {
+            files = [this.bankwestFile]
+            bankTypes = [BankType.Bankwest]
+        }
+        this.fileUploadService.post(files, bankTypes, this.form.value.hideAxis ?? false).subscribe(
         (data: Blob) => {
           this.extractImage(data);
         }

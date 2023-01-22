@@ -5,8 +5,8 @@ interface BankFormData {
 }
 
 enum BankType {
-    Bankwest,
-    Commbank
+    Bankwest = "bankwest",
+    Commbank = "commbank"
 }
 
 export { BankFormData, BankType }
