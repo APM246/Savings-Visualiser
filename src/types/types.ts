@@ -4,4 +4,9 @@ interface BankFormData {
     handleInput: (event: Event) => void,
 }
 
-export { BankFormData }
+enum BankType {
+    Bankwest,
+    Commbank
+}
+
+export { BankFormData, BankType }

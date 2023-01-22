@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FileUploadService } from '../file-upload.service';
-import { BankFormData } from '../../types/types';
+import { BankFormData, BankType } from '../../types/types';
 
 @Component({
   selector: 'app-upload',
@@ -13,17 +13,19 @@ export class UploadComponent implements OnInit {
   commbankFile!: File | null;
   @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
 
-  handleBankwestInput = (event: Event) => {
+  handleInput(event: Event, bankType: BankType) {
     const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
     if (uploadedFile != null) {
-      this.bankwestFile = uploadedFile;
-    }
-  }
-
-  handleCommbankInput = (event: Event) => {
-    const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
-    if (uploadedFile != null) {
-      this.commbankFile = uploadedFile;
+        switch (bankType) {
+            case BankType.Bankwest: {
+                this.bankwestFile = uploadedFile;
+                break;
+            }
+            default: {
+                this.commbankFile = uploadedFile
+                break;
+            }
+        }
     }
   }
 
@@ -31,12 +33,12 @@ export class UploadComponent implements OnInit {
     {
       mainText: "Upload Bankwest transactions",
       formControlName: "bankwestData",
-      handleInput: this.handleBankwestInput,
+      handleInput: (event) => this.handleInput(event, BankType.Bankwest),
     },
     {
       mainText: "Upload Commbank transactions (optional)",
       formControlName: "commbankData",
-      handleInput: this.handleCommbankInput,
+      handleInput: (event) => this.handleInput(event, BankType.Commbank),
     }
   ]
 
