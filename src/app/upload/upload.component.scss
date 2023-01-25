@@ -1,4 +1,4 @@
-form {
+/*form {
     display: flex;
     align-items: center;
     gap: 250px;
@@ -47,17 +47,45 @@ input[type=file] {
 
 label:hover {
     cursor: pointer;
-}
+}*/
 
 button {
     width: 268px;
     height: 66px;
     border-radius: 55px;
-    background-color: rgb(217, 217, 217);
+    background-color: rgb(70, 197, 255);
     font-family: 'Georama-Regular';
     font-size: 35px;
 }
 
 button:enabled {
     cursor: pointer;
+}
+
+div {
+    font-family: 'Georama-Light'
+}
+
+.flex-container {
+    display: flex;
+    height: 250px;
+}
+
+#file-upload-container {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid black;
+    padding-right: 93px;
+    font-size: 44px;
+}
+
+#uploaded-file-container {
+    display: flex;
+    align-items: center;
+    height: 250px;
+    padding-left: 93px;
+}
+
+#chevron-down {
+    width: 31px;
 }

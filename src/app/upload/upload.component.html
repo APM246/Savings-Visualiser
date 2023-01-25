@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="getGraph()">
+<!--<form [formGroup]="form" (ngSubmit)="getGraph()">
     <div class="rows">
         <div class="row-container" *ngFor="let bank of banks">
             <div class="main-text-container">
@@ -20,4 +20,12 @@
     </div>
     
     <button type="submit" [disabled]="!form.valid"> Visualise </button>
-</form>
+</form>-->
+
+<div class="flex-container">
+    <div id="file-upload-container"> 
+        <p> File upload </p>
+        <img id="chevron-down" src="../../assets/chevron down.png">
+    </div>
+    <div id="uploaded-file-container"> Your uploaded files will show here </div>
+</div>

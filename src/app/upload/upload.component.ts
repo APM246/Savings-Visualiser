@@ -9,7 +9,7 @@ import { BankFormData, BankType } from '../../types/types';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-  bankwestFile: File | null = null;
+  /*bankwestFile: File | null = null;
   commbankFile!: File | null;
   @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
 
@@ -46,14 +46,14 @@ export class UploadComponent implements OnInit {
     bankwestData: new FormControl<File | null>(null, [Validators.required]),
     commbankData: new FormControl<File | null>(null),
     hideAxis: new FormControl<boolean>(false, {nonNullable: true})
-  })
+  })*/
 
   constructor(public fileUploadService: FileUploadService) { }
 
   ngOnInit(): void {
   }
 
-  getGraph() {
+  /*getGraph() {
     if (this.bankwestFile != null) {
         let files: File[];
         let bankTypes: BankType[]
@@ -79,5 +79,5 @@ export class UploadComponent implements OnInit {
     reader.onloadend = () => { 
       this.graphImage.emit(reader.result);
     }
-  }
+  }*/
 }
