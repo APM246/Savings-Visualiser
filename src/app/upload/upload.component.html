@@ -12,6 +12,10 @@
             </label>
             <input id="upload" type="file" accept=".csv" (change)="handleInput($event)"> 
         </div>
+        <div>
+            <label for="hideAxis"> Hide y-axis </label>
+            <input id="hideAxis" type="checkbox" (change)="handleHideAxis($event)">
+        </div>
     </div>
     <div id="right-container"> 
         <div id="right-container-default-text" *ngIf="this.files.length == 0; else elseBlock"> Your uploaded files will show up here </div>

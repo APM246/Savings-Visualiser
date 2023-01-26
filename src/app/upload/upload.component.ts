@@ -14,6 +14,7 @@ export class UploadComponent implements OnInit {
 
     files: File[] = [];
     banks: BankType[] = [];
+    isHideAxisChecked: boolean = false;
     @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
 
     constructor(public fileUploadService: FileUploadService) { }
@@ -32,10 +33,14 @@ export class UploadComponent implements OnInit {
         this.banks[index] = event.value;
     }
 
+    handleHideAxis(event: Event) {
+        this.isHideAxisChecked = (event.target as HTMLInputElement).checked;
+    }
+
     getGraph() {
-        console.log("hi")
         if (this.files.length != 0) {
-            this.fileUploadService.post(this.files, this.banks, false).subscribe(
+            console.log(this.isHideAxisChecked);
+            this.fileUploadService.post(this.files, this.banks, this.isHideAxisChecked).subscribe(
                 (data: Blob) => {
                     this.extractImage(data);
                 })

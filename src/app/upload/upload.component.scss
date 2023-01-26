@@ -1,66 +1,19 @@
-/*form {
-    display: flex;
-    align-items: center;
-    gap: 250px;
-}
-
-.rows {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.row-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 21px; 
-}
-
-.main-text-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 51px;
-}
-
-.main-text {
-    font-family: 'Georama-Light';
-    font-size: 32px;
-}
-
-.filename-text {
-    width: 120px;
-    font-size: 16px;
-    font-family: 'Lucida Sans';
-}
-
-.icons {
-    width: 57.44px;
-    height: 57.44px;
-}
-
-input[type=file] {
-    display: none;
-}
-
-label:hover {
-    cursor: pointer;
-}*/
-
 button {
     width: 223px;
     height: 55px;
     border-radius: 55px;
-    background-color: rgb(58, 166, 133);
     font-family: 'Georama-Regular';
+    background-color: rgb(217, 217, 217);
     font-size: 30px;
-    color: white;
+    color: black;
+    mix-blend-mode: overlay;
 }
 
 button:enabled {
     cursor: pointer;
+    background-color: rgb(58, 166, 133);
+    color: white;
+    mix-blend-mode: normal;
 }
 
 div {
@@ -70,7 +23,7 @@ div {
 .flex-container {
     display: flex;
     height: 480px;
-    margin-bottom: 120px;
+    margin-bottom: 100px;
 }
 
 .button-flex-container {
@@ -100,6 +53,7 @@ div {
     height: 189px;
     border: dashed 2px black;
     background-color: white;
+    margin-bottom: 50px;
 }
 
 #upload-label {
@@ -117,6 +71,11 @@ div {
 
 input[type=file] {
     display: none;
+}
+
+#hideAxis {
+    height: 16px;
+    width: 16px;
 }
 
 #right-container {
