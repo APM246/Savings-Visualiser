@@ -9,26 +9,25 @@ import { BankFormData, BankType } from '../../types/types';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-  /*bankwestFile: File | null = null;
-  commbankFile!: File | null;
-  @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
+    readonly MAX_FILE_NAME_LENGTH = 35;
 
-  handleInput(event: Event, bankType: BankType) {
-    const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
-    if (uploadedFile != null) {
-        switch (bankType) {
-            case BankType.Bankwest: {
-                this.bankwestFile = uploadedFile;
-                break;
-            }
-            default: {
-                this.commbankFile = uploadedFile
-                break;
-            }
+    files: File[] = [];
+    @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
+
+    handleInput(event: Event) {
+        const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
+        if (uploadedFile != null) {
+            this.files.push(uploadedFile);
         }
     }
-  }
 
+    constructor(public fileUploadService: FileUploadService) { }
+
+    ngOnInit(): void {}
+
+
+}
+  /*
   readonly banks: BankFormData[] = [
     {
       mainText: "Upload Bankwest transactions",
@@ -47,11 +46,6 @@ export class UploadComponent implements OnInit {
     commbankData: new FormControl<File | null>(null),
     hideAxis: new FormControl<boolean>(false, {nonNullable: true})
   })*/
-
-  constructor(public fileUploadService: FileUploadService) { }
-
-  ngOnInit(): void {
-  }
 
   /*getGraph() {
     if (this.bankwestFile != null) {
@@ -80,4 +74,3 @@ export class UploadComponent implements OnInit {
       this.graphImage.emit(reader.result);
     }
   }*/
-}

@@ -1,46 +1,37 @@
-<!--<form [formGroup]="form" (ngSubmit)="getGraph()">
-    <div class="rows">
-        <div class="row-container" *ngFor="let bank of banks">
-            <div class="main-text-container">
-                <p class="main-text"> {{ bank.mainText }} </p>
-                <label [for]="bank.formControlName">
-                    <img src="../../assets/upload.png" class="icons"> 
-                </label>
-                <input [id]="bank.formControlName" type="file" [formControlName]="bank.formControlName" accept=".csv" (change)="bank.handleInput($event)">
-            </div>
-            <div class="filename-text"> 
-                <p *ngIf="bank.formControlName == 'bankwestData'; else cba"> {{ bankwestFile?.name }} </p>
-                <ng-template #cba> {{ commbankFile?.name }} </ng-template>
-            </div>
-        </div>
+<!--<div class="rows">
         <div>
             <label for="hideAxis" class="main-text"> Hide y-axis </label>
             <input id="hideAxis" type="checkbox" formControlName="hideAxis">
         </div>
     </div>
-    
-    <button type="submit" [disabled]="!form.valid"> Visualise </button>
-
     <mat-form-field>
             <mat-label id="file-upload-text">  </mat-label>
             <mat-select>
                 <mat-option> Bankwest </mat-option>
                 <mat-option> Commbank </mat-option>
             </mat-select>
-        </mat-form-field> 
-</form>-->
+        </mat-form-field> -->
 
 <div class="flex-container">
     <div id="left-container">
         <p id="left-container-text"> Upload files here. Once uploaded select which bank the file is from. </p>
         <div id="file-upload-container">
-            <label for="upload">
+            <label id="upload-label" for="upload">
                 <img id="upload-icon" src="../../assets/upload.png">
             </label>
-            <input id="upload" type="file" accept=".csv"> 
+            <input id="upload" type="file" accept=".csv" (change)="handleInput($event)"> 
         </div>
     </div>
-    <div id="right-container"> Your uploaded files will show up here </div>
+    <div id="right-container"> 
+        <p *ngIf="this.files.length == 0; else elseBlock"> Your uploaded files will show up here </p>
+        <ng-template #elseBlock> 
+            <ol> 
+                <li *ngFor="let file of files">
+                    {{ file.name.substring(0, MAX_FILE_NAME_LENGTH) }}
+                </li>
+            </ol> 
+        </ng-template>
+    </div>
 </div>
 <div class="button-flex-container">
     <button> Visualise </button>
