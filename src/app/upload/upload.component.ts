@@ -33,6 +33,7 @@ export class UploadComponent implements OnInit {
     }
 
     getGraph() {
+        console.log("hi")
         if (this.files.length != 0) {
             this.fileUploadService.post(this.files, this.banks, false).subscribe(
                 (data: Blob) => {
@@ -49,9 +50,3 @@ export class UploadComponent implements OnInit {
             }
       }
 }
-  /*
-
-  form = new FormGroup({
-    bankwestData: new FormControl<File | null>(null, [Validators.required]),
-    hideAxis: new FormControl<boolean>(false, {nonNullable: true})
-  })*/

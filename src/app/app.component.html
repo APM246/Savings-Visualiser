@@ -1,12 +1,10 @@
-<!--<div id="upload-container">
+<div id="top-section" *ngIf="srcImage == null; else elseBlock">
     <app-upload (graphImage)="setImage($event)"></app-upload>
 </div>
-<div id="photo-container">
-    <img [src]="srcImage" class="graph">
-</div>-->
-
-<div id="top-section">
-    <app-upload></app-upload>
-</div>
+<ng-template #elseBlock>
+    <div id="photo-container">
+        <img [src]="srcImage" id="graph">
+    </div>
+</ng-template>
 
 <router-outlet></router-outlet>
