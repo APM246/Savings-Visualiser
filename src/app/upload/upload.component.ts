@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FileUploadService } from '../file-upload.service';
-import { BankFormData, BankType } from '../../types/types';
+import { BankType } from '../../types/types';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-upload',
@@ -12,65 +13,45 @@ export class UploadComponent implements OnInit {
     readonly MAX_FILE_NAME_LENGTH = 35;
 
     files: File[] = [];
+    banks: BankType[] = [];
     @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
-
-    handleInput(event: Event) {
-        const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
-        if (uploadedFile != null) {
-            this.files.push(uploadedFile);
-        }
-    }
 
     constructor(public fileUploadService: FileUploadService) { }
 
     ngOnInit(): void {}
 
+    handleInput(event: Event) {
+        const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
+        if (uploadedFile != null) {
+            this.files.push(uploadedFile);
+            this.banks.push(BankType.Bankwest);
+        }
+    }
 
+    handleSelect(index: number, event: MatSelectChange) {
+        this.banks[index] = event.value;
+    }
+
+    getGraph() {
+        if (this.files.length != 0) {
+            this.fileUploadService.post(this.files, this.banks, false).subscribe(
+                (data: Blob) => {
+                    this.extractImage(data);
+                })
+        }
+    }
+    
+      private extractImage(data: Blob) {
+            let reader = new FileReader();
+            reader.readAsDataURL(data);
+            reader.onloadend = () => { 
+                this.graphImage.emit(reader.result);
+            }
+      }
 }
   /*
-  readonly banks: BankFormData[] = [
-    {
-      mainText: "Upload Bankwest transactions",
-      formControlName: "bankwestData",
-      handleInput: (event) => this.handleInput(event, BankType.Bankwest),
-    },
-    {
-      mainText: "Upload Commbank transactions (optional)",
-      formControlName: "commbankData",
-      handleInput: (event) => this.handleInput(event, BankType.Commbank),
-    }
-  ]
 
   form = new FormGroup({
     bankwestData: new FormControl<File | null>(null, [Validators.required]),
-    commbankData: new FormControl<File | null>(null),
     hideAxis: new FormControl<boolean>(false, {nonNullable: true})
   })*/
-
-  /*getGraph() {
-    if (this.bankwestFile != null) {
-        let files: File[];
-        let bankTypes: BankType[]
-        if (this.commbankFile != null) {
-            files = [this.bankwestFile, this.commbankFile]
-            bankTypes = [BankType.Bankwest, BankType.Commbank]
-        }
-        else {
-            files = [this.bankwestFile]
-            bankTypes = [BankType.Bankwest]
-        }
-        this.fileUploadService.post(files, bankTypes, this.form.value.hideAxis ?? false).subscribe(
-        (data: Blob) => {
-          this.extractImage(data);
-        }
-      )
-    }
-  }
-
-  private extractImage(data: Blob) {
-    let reader = new FileReader();
-    reader.readAsDataURL(data);
-    reader.onloadend = () => { 
-      this.graphImage.emit(reader.result);
-    }
-  }*/

@@ -1,16 +1,7 @@
-<!--<div class="rows">
-        <div>
-            <label for="hideAxis" class="main-text"> Hide y-axis </label>
-            <input id="hideAxis" type="checkbox" formControlName="hideAxis">
-        </div>
-    </div>
-    <mat-form-field>
-            <mat-label id="file-upload-text">  </mat-label>
-            <mat-select>
-                <mat-option> Bankwest </mat-option>
-                <mat-option> Commbank </mat-option>
-            </mat-select>
-        </mat-form-field> -->
+<!--
+<label for="hideAxis" class="main-text"> Hide y-axis </label>
+<input id="hideAxis" type="checkbox" formControlName="hideAxis">
+</div> -->
 
 <div class="flex-container">
     <div id="left-container">
@@ -23,16 +14,23 @@
         </div>
     </div>
     <div id="right-container"> 
-        <p *ngIf="this.files.length == 0; else elseBlock"> Your uploaded files will show up here </p>
+        <div id="right-container-default-text" *ngIf="this.files.length == 0; else elseBlock"> Your uploaded files will show up here </div>
         <ng-template #elseBlock> 
             <ol> 
-                <li *ngFor="let file of files">
+                <li class="file-list" *ngFor="let file of files; index as i">
                     {{ file.name.substring(0, MAX_FILE_NAME_LENGTH) }}
+                    <mat-form-field class="bank-selection">
+                        <mat-label id="file-upload-text"> Bank </mat-label>
+                        <mat-select value="bankwest" (selectionChange)="handleSelect(i, $event)">
+                            <mat-option value="bankwest"> Bankwest </mat-option>
+                            <mat-option value="commbank"> Commbank </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </li>
             </ol> 
         </ng-template>
     </div>
 </div>
 <div class="button-flex-container">
-    <button> Visualise </button>
+    <button [disabled]="files.length == 0" (submit)="getGraph()"> Visualise </button>
 </div>
