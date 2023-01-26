@@ -20,12 +20,28 @@
     </div>
     
     <button type="submit" [disabled]="!form.valid"> Visualise </button>
+
+    <mat-form-field>
+            <mat-label id="file-upload-text">  </mat-label>
+            <mat-select>
+                <mat-option> Bankwest </mat-option>
+                <mat-option> Commbank </mat-option>
+            </mat-select>
+        </mat-form-field> 
 </form>-->
 
 <div class="flex-container">
-    <div id="file-upload-container"> 
-        <p> File upload </p>
-        <img id="chevron-down" src="../../assets/chevron down.png">
+    <div id="left-container">
+        <p id="left-container-text"> Upload files here. Once uploaded select which bank the file is from. </p>
+        <div id="file-upload-container">
+            <label for="upload">
+                <img id="upload-icon" src="../../assets/upload.png">
+            </label>
+            <input id="upload" type="file" accept=".csv"> 
+        </div>
     </div>
-    <div id="uploaded-file-container"> Your uploaded files will show here </div>
+    <div id="right-container"> Your uploaded files will show up here </div>
+</div>
+<div class="button-flex-container">
+    <button> Visualise </button>
 </div>

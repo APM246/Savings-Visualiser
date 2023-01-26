@@ -50,12 +50,13 @@ label:hover {
 }*/
 
 button {
-    width: 268px;
-    height: 66px;
+    width: 223px;
+    height: 55px;
     border-radius: 55px;
-    background-color: rgb(70, 197, 255);
+    background-color: rgb(58, 166, 133);
     font-family: 'Georama-Regular';
-    font-size: 35px;
+    font-size: 30px;
+    color: white;
 }
 
 button:enabled {
@@ -68,24 +69,59 @@ div {
 
 .flex-container {
     display: flex;
-    height: 250px;
+    height: 480px;
+    margin-bottom: 120px;
+}
+
+.button-flex-container {
+    display: flex;
+    justify-content: center;
+
+}
+
+#left-container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-right: 1px solid black;
+    padding-right: 93px;
+    font-size: 24px;
+}
+
+#left-container-text {
+    width: 90%;
+    margin-top: 37px;
+    margin-bottom: 57px;
 }
 
 #file-upload-container {
     display: flex;
+    width: 90%;
+    height: 189px;
+    border: dashed 2px black;
+    justify-content: center;
     align-items: center;
-    border-right: 1px solid black;
-    padding-right: 93px;
-    font-size: 44px;
+    background-color: white;
 }
 
-#uploaded-file-container {
+#upload-icon {
+    width: 63px;
+    height: 63px;
+}
+
+#right-container {
+    width: 50%;
     display: flex;
     align-items: center;
-    height: 250px;
+    justify-content: center;
     padding-left: 93px;
 }
 
-#chevron-down {
-    width: 31px;
+input[type=file] {
+    display: none;
+}
+
+#file-upload-text {
+    
 }
