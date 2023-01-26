@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FileUploadService } from '../file-upload.service';
 import { BankType } from '../../types/types';
 import { MatSelectChange } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-upload',
@@ -17,7 +17,7 @@ export class UploadComponent implements OnInit {
     isHideAxisChecked: boolean = false;
     @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
 
-    constructor(public fileUploadService: FileUploadService) { }
+    constructor(public fileUploadService: FileUploadService, private snackBar: MatSnackBar) { }
 
     ngOnInit(): void {}
 
@@ -39,11 +39,17 @@ export class UploadComponent implements OnInit {
 
     getGraph() {
         if (this.files.length != 0) {
-            console.log(this.isHideAxisChecked);
-            this.fileUploadService.post(this.files, this.banks, this.isHideAxisChecked).subscribe(
-                (data: Blob) => {
-                    this.extractImage(data);
-                })
+            this.fileUploadService.post(this.files, this.banks, this.isHideAxisChecked)
+                .subscribe(
+                    (data: Blob) => {
+                        this.extractImage(data);
+                    },
+                    (error: Error) => {
+                        this.snackBar.open("Incorrect configuration", "", {
+                            duration: 4000
+                        });
+                    }
+                )
         }
     }
     
