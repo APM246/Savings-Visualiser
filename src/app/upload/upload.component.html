@@ -16,7 +16,7 @@
         <div id="right-container-default-text" *ngIf="this.files.length == 0; else elseBlock"> Your uploaded files will show up here </div>
         <ng-template #elseBlock> 
             <ol> 
-                <li class="file-list" *ngFor="let file of files; index as i">
+                <li class="file-list" *ngFor="let file of files; index as i" @fade>
                     {{ file.name.substring(0, MAX_FILE_NAME_LENGTH) }}
                     <mat-form-field class="bank-selection">
                         <mat-label id="file-upload-text"> Bank </mat-label>

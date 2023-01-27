@@ -3,11 +3,20 @@ import { FileUploadService } from '../file-upload.service';
 import { BankType } from '../../types/types';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.scss']
+  styleUrls: ['./upload.component.scss'],
+  animations: [
+    trigger('fade', [
+        transition(':enter', [
+            style({opacity : 0}),
+            animate(500, style({opacity: 1}))
+        ])
+    ])
+  ]
 })
 export class UploadComponent implements OnInit {
     readonly MAX_FILE_NAME_LENGTH = 35;
