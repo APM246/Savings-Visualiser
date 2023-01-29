@@ -1,35 +1,42 @@
-<div class="flex-container">
-    <div id="left-container">
-        <p id="left-container-text"> Upload files here. Once uploaded select which bank the file is from. </p>
-        <div id="file-upload-container">
-            <label id="upload-label" for="upload">
-                <img id="upload-icon" src="../../assets/upload.png">
-            </label>
-            <input id="upload" type="file" accept=".csv" (change)="handleInput($event)"> 
+<ng-template [ngIf]="!isLoading" [ngIfElse]="loading">
+    <div class="flex-container">
+        <div id="left-container">
+            <p id="left-container-text"> Upload files here. Once uploaded select which bank the file is from. </p>
+            <div id="file-upload-container">
+                <label id="upload-label" for="upload">
+                    <img id="upload-icon" src="../../assets/upload.png">
+                </label>
+                <input id="upload" type="file" accept=".csv" (change)="handleInput($event)"> 
+            </div>
+            <div>
+                <label for="hideAxis"> Hide y-axis </label>
+                <input id="hideAxis" type="checkbox" (change)="handleHideAxis($event)">
+            </div>
         </div>
-        <div>
-            <label for="hideAxis"> Hide y-axis </label>
-            <input id="hideAxis" type="checkbox" (change)="handleHideAxis($event)">
+        <div id="right-container"> 
+            <div id="right-container-default-text" *ngIf="this.files.length == 0; else elseBlock"> Your uploaded files will show up here </div>
+            <ng-template #elseBlock> 
+                <ol> 
+                    <li class="file-list" *ngFor="let file of files; index as i" @fade>
+                        {{ file.name.substring(0, MAX_FILE_NAME_LENGTH) }}
+                        <mat-form-field class="bank-selection">
+                            <mat-label id="file-upload-text"> Bank </mat-label>
+                            <mat-select value="bankwest" (selectionChange)="handleSelect(i, $event)">
+                                <mat-option value="bankwest"> Bankwest </mat-option>
+                                <mat-option value="commbank"> Commbank </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </li>
+                </ol> 
+            </ng-template>
         </div>
     </div>
-    <div id="right-container"> 
-        <div id="right-container-default-text" *ngIf="this.files.length == 0; else elseBlock"> Your uploaded files will show up here </div>
-        <ng-template #elseBlock> 
-            <ol> 
-                <li class="file-list" *ngFor="let file of files; index as i" @fade>
-                    {{ file.name.substring(0, MAX_FILE_NAME_LENGTH) }}
-                    <mat-form-field class="bank-selection">
-                        <mat-label id="file-upload-text"> Bank </mat-label>
-                        <mat-select value="bankwest" (selectionChange)="handleSelect(i, $event)">
-                            <mat-option value="bankwest"> Bankwest </mat-option>
-                            <mat-option value="commbank"> Commbank </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </li>
-            </ol> 
-        </ng-template>
+    <div class="button-flex-container">
+        <button [disabled]="files.length == 0" (click)="getGraph()"> Visualise </button>
     </div>
-</div>
-<div class="button-flex-container">
-    <button [disabled]="files.length == 0" (click)="getGraph()"> Visualise </button>
-</div>
+</ng-template>
+<ng-template #loading>
+    <div class="loading-container">
+        <mat-spinner color="warn"></mat-spinner>
+    </div>
+</ng-template>

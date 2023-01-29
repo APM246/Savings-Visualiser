@@ -24,6 +24,7 @@ export class UploadComponent implements OnInit {
     files: File[] = [];
     banks: BankType[] = [];
     isHideAxisChecked: boolean = false;
+    isLoading: boolean = false;
     @Output() graphImage: EventEmitter<string | ArrayBuffer | null> = new EventEmitter();
 
     constructor(public fileUploadService: FileUploadService, private snackBar: MatSnackBar) { }
@@ -48,6 +49,7 @@ export class UploadComponent implements OnInit {
 
     getGraph() {
         if (this.files.length != 0) {
+            this.isLoading = true;
             this.fileUploadService.post(this.files, this.banks, this.isHideAxisChecked)
                 .subscribe(
                     (data: Blob) => {
@@ -62,11 +64,12 @@ export class UploadComponent implements OnInit {
         }
     }
     
-      private extractImage(data: Blob) {
-            let reader = new FileReader();
-            reader.readAsDataURL(data);
-            reader.onloadend = () => { 
-                this.graphImage.emit(reader.result);
-            }
-      }
+    private extractImage(data: Blob) {
+        let reader = new FileReader();
+        reader.readAsDataURL(data);
+        reader.onloadend = () => { 
+            this.graphImage.emit(reader.result);
+        }
+        this.isLoading = false;
+    }
 }
