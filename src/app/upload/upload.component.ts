@@ -56,6 +56,7 @@ export class UploadComponent implements OnInit {
                         this.extractImage(data);
                     },
                     (error: Error) => {
+                        this.isLoading = false;
                         this.snackBar.open("Incorrect configuration", "", {
                             duration: 4000
                         });
