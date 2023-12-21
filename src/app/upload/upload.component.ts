@@ -35,7 +35,7 @@ export class UploadComponent implements OnInit {
         const uploadedFile: File | null = (event.target as HTMLInputElement).files!.item(0);
         if (uploadedFile != null) {
             this.files.push(uploadedFile);
-            this.banks.push(BankType.Bankwest);
+            this.banks.push(BankType.Bankwest); // placeholder
         }
     }
 

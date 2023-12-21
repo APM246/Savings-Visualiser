@@ -1,6 +1,7 @@
 enum BankType {
     Bankwest = "bankwest",
-    Commbank = "commbank"
+    Commbank = "commbank",
+    Macquarie = "macquarie"
 }
 
 export { BankType }
