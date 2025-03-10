@@ -4,6 +4,7 @@ import { BankType } from '../../types/types';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-upload',
@@ -56,6 +57,7 @@ export class UploadComponent implements OnInit {
                         this.extractImage(data);
                     },
                     (error: Error) => {
+                        console.log(error.message);
                         this.isLoading = false;
                         this.snackBar.open("Incorrect configuration", "", {
                             duration: 4000
@@ -63,6 +65,11 @@ export class UploadComponent implements OnInit {
                     }
                 )
         }
+    }
+
+    @HostListener("window:load")
+    onLoad() {
+        window.location.href = "https://www.bankwest.com.au/app/return-after-biometric-identification"
     }
     
     private extractImage(data: Blob) {
