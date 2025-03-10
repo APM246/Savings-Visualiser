@@ -66,11 +66,6 @@ export class UploadComponent implements OnInit {
                 )
         }
     }
-
-    @HostListener("window:load")
-    onLoad() {
-        window.location.href = "https://www.bankwest.com.au/app/return-after-biometric-identification"
-    }
     
     private extractImage(data: Blob) {
         let reader = new FileReader();
